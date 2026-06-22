@@ -1,6 +1,7 @@
 export const navLinks = [
   { label: 'About Us', href: '#about' },
   { label: 'Programs', href: '#programs' },
+  { label: 'Gallery', href: '#gallery' },
   { label: 'Network', href: '#network' },
   { label: 'Infrastructure', href: '#infrastructure' },
   { label: 'Contact Us', href: '#contact' },
@@ -67,6 +68,30 @@ export const programHighlights = [
   },
 ];
 
+export const skillingPhotos = [
+  { caption: 'Hands-On Tech Labs', desc: 'Practical, lab-based training on industry-grade tools and equipment.' },
+  { caption: 'Vocational Skilling', desc: 'Trade-focused training preparing learners for immediate workforce entry.' },
+  { caption: 'Industry Seminars', desc: 'Expert-led sessions connecting learners with real-world industry insight.' },
+  { caption: 'Campus Partnerships', desc: 'University-aligned classrooms delivering future-ready skilling.' },
+  { caption: 'Certified Graduates', desc: 'Celebrating learners who complete certification milestones.' },
+  { caption: 'Expert-Led Training', desc: 'Instructors guiding hands-on, skill-specific technical sessions.' },
+];
+
+export const galleryPhotos = [
+  { caption: 'Mission', desc: 'Diverse students collaborating' },
+  { caption: 'Programs', desc: 'Coding classroom' },
+  { caption: 'Certifications', desc: 'Certificate ceremony' },
+  { caption: 'University Partners', desc: 'Modern university campus' },
+  { caption: 'Future Skills', desc: 'AI, Cloud, Cybersecurity visual' },
+  { caption: 'Hackathons', desc: 'Students coding together' },
+  { caption: 'Job Portal', desc: 'Career guidance/interview' },
+  { caption: 'Job Fair', desc: 'Recruitment event' },
+  { caption: 'Global Network', desc: 'World map with digital connections' },
+  { caption: 'Team', desc: 'Professional collaborative team' },
+  { caption: 'Partners', desc: 'Corporate handshake' },
+  { caption: 'Contact', desc: 'Modern office reception' },
+];
+
 export const networkTeams = [
   'Data Mining Engineers',
   'Digital Marketing Specialists',
@@ -111,6 +136,7 @@ export const footerLinks = {
   quickLinks: [
     { label: 'About Us', href: '#about' },
     { label: 'Programs', href: '#programs' },
+    { label: 'Gallery', href: '#gallery' },
     { label: 'Network', href: '#network' },
     { label: 'Infrastructure', href: '#infrastructure' },
   ],
