@@ -5,7 +5,7 @@ import './Login.css';
 
 const initialForm = { email: '', password: '' };
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4177';
 
 export default function Login({ open, onClose, onLoginSuccess, restrictToAdmin = false }) {
   const [form, setForm] = useState(initialForm);

@@ -4,7 +4,7 @@ import logo from '../../assets/images/logo.png';
 import Icon from '../ui/Icon';
 import './AdminDashboard.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4177';
 
 const NAV_ITEMS = [
   { key: 'analytics', label: 'Analytics', icon: 'network' },

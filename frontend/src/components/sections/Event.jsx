@@ -7,7 +7,7 @@ const interestOptions = [
   { key: 'speaker', label: 'Nominate as Speaker', icon: 'mic' },
   { key: 'award', label: 'Nominate for Award', icon: 'trophy' },
   { key: 'sponsor', label: 'Sponsor the Event', icon: 'briefcase' },
-  { key: 'presenter', label: 'Present at Event', icon: 'flask' },
+  { key: 'presenter', label: 'Represent your organization at event', icon: 'flask' },
 ];
 
 const initialForm = {
@@ -24,7 +24,7 @@ const initialForm = {
   presenter: false,
 };
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4177';
 
 export default function Event({ open, onClose }) {
   const [form, setForm] = useState(initialForm);

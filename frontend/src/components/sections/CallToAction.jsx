@@ -4,7 +4,7 @@ import Icon from '../ui/Icon';
 import './CallToAction.css';
 
 const initialForm = { name: '', email: '', message: '' };
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4177';
 
 export default function CallToAction() {
   const [form, setForm] = useState(initialForm);

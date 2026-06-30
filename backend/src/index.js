@@ -29,5 +29,5 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: 'Something went wrong' });
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4177;
 app.listen(port, () => console.log(`Backend listening on http://localhost:${port}`));
