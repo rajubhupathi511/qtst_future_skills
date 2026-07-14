@@ -60,8 +60,6 @@ export default function Navbar({ onOpenAuth, authLabel = 'Join Us' }) {
             <div className="navbar__cta navbar__cta--mobile">
               <a
                 href={eventLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="navbar__event-btn"
                 onClick={() => setOpen(false)}
               >
@@ -82,7 +80,7 @@ export default function Navbar({ onOpenAuth, authLabel = 'Join Us' }) {
           </nav>
 
           <div className="navbar__cta">
-            <a href={eventLink.href} target="_blank" rel="noopener noreferrer" className="navbar__event-btn">
+            <a href={eventLink.href} className="navbar__event-btn">
               <span className="navbar__event-dot" />
               {eventLink.label}
             </a>

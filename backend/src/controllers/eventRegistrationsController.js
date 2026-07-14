@@ -1,6 +1,7 @@
 import { prisma } from '../db.js';
 import { validateEventRegistration } from '../validators/eventRegistrationValidator.js';
 import { fromPassId, withPassId } from '../utils/passId.js';
+import { sendRegistrationConfirmationEmail } from '../services/emailService.js';
 
 export async function createEventRegistration(req, res, next) {
   try {
@@ -52,7 +53,16 @@ export async function createEventRegistration(req, res, next) {
       },
     });
 
-    res.status(201).json(withPassId(registration));
+    const result = withPassId(registration);
+
+    sendRegistrationConfirmationEmail({
+      name: result.name,
+      email: result.email,
+      mobile: result.mobile,
+      passId: result.passId,
+    }).catch((err) => console.error('[Email] Uncaught error:', err.message));
+
+    res.status(201).json(result);
   } catch (err) {
     next(err);
   }

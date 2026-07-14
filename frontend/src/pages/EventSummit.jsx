@@ -126,7 +126,7 @@ export default function EventSummit({ session, setSession }) {
       <Footer hideQuickLinks />
 
       <Event open={eventOpen} onClose={() => setEventOpen(false)} />
-      <Login open={loginOpen} onClose={() => setLoginOpen(false)} onLoginSuccess={handleLoginSuccess} />
+      <Login open={loginOpen} onClose={() => setLoginOpen(false)} onLoginSuccess={handleLoginSuccess} restrictToUser />
     </div>
   );
 }

@@ -32,6 +32,7 @@ export default function Event({ open, onClose }) {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [passData, setPassData] = useState(null);
 
   const setField = (key) => (value) => setForm((f) => ({ ...f, [key]: value }));
   const toggleInterest = (key) => setForm((f) => ({ ...f, [key]: !f[key] }));
@@ -60,11 +61,12 @@ export default function Event({ open, onClose }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
         if (data.errors) setErrors(data.errors);
         throw new Error(data.error || 'Registration failed. Please try again.');
       }
+      setPassData({ passId: data.passId, email: form.email, mobile: form.mobile, name: form.name });
       setSubmitted(true);
       setForm(initialForm);
     } catch (err) {
@@ -78,19 +80,9 @@ export default function Event({ open, onClose }) {
     setSubmitted(false);
     setSubmitError('');
     setErrors({});
+    setPassData(null);
     onClose?.();
   };
-
-  useEffect(() => {
-    if (!submitted) return undefined;
-    const timer = setTimeout(() => {
-      setSubmitted(false);
-      setSubmitError('');
-      setErrors({});
-      onClose?.();
-    }, 1800);
-    return () => clearTimeout(timer);
-  }, [submitted, onClose]);
 
   return (
     <Modal
@@ -101,6 +93,19 @@ export default function Event({ open, onClose }) {
       highlight="Summit"
       description="Free entry · QR pass sent instantly · 08 Aug 2026, T-Works Hyderabad"
     >
+      {submitted && passData ? (
+        <div className="event__success-screen">
+          <div className="event__success-icon">✅</div>
+          <h3 className="event__success-title">Registration Successful!</h3>
+          <p className="event__success-sub">
+            Your pass has been confirmed. Login details have been sent to your email.
+          </p>
+
+          <button type="button" className="btn btn-primary event__success-close" onClick={handleClose}>
+            Done <Icon name="arrow" size={16} />
+          </button>
+        </div>
+      ) : (
       <form className="event__form" onSubmit={handleSubmit}>
         <div className="event__field">
           <label>Full Name <span>*</span></label>
@@ -208,13 +213,8 @@ export default function Event({ open, onClose }) {
         {submitError && (
           <p className="event__error event__error--banner">{submitError}</p>
         )}
-
-        {submitted && (
-          <p className="event__success">
-            <Icon name="check" size={16} color="var(--teal)" /> You're registered! Login to access your pass.
-          </p>
-        )}
       </form>
+      )}
     </Modal>
   );
 }

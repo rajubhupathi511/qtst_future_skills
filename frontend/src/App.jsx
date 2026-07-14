@@ -4,8 +4,28 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import EventSummit from './pages/EventSummit';
 
+const SESSION_KEY = 'qtf_session';
+
+function loadSession() {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
 function App() {
-  const [session, setSession] = useState(null); // { role: 'user', registration } | { role: 'admin' }
+  const [session, setSessionState] = useState(loadSession);
+
+  const setSession = (data) => {
+    if (data) {
+      localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    } else {
+      localStorage.removeItem(SESSION_KEY);
+    }
+    setSessionState(data);
+  };
 
   return (
     <BrowserRouter>

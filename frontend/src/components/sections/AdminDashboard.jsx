@@ -502,7 +502,11 @@ export default function AdminDashboard({ onLogout }) {
                       <td>{r.name}</td>
                       <td>{r.org}</td>
                       <td>{r.passId}</td>
-                      <td>{r.checkedIn ? '✓' : '○'}</td>
+                      <td>
+                        <span className={`admin-pill ${r.checkedIn ? 'admin-pill--in' : ''}`}>
+                          {r.checkedIn ? '✓ In' : 'Pending'}
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

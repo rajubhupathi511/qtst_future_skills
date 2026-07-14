@@ -5,6 +5,8 @@ import eventRegistrations from './routes/eventRegistrations.js';
 import auth from './routes/auth.js';
 import contactMessages from './routes/contactMessages.js';
 
+
+
 const app = express();
 const corsOrigins = (process.env.CORS_ORIGIN || '').split(',').map((s) => s.trim()).filter(Boolean);
 const isLocalhost = (origin) => /^https?:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);

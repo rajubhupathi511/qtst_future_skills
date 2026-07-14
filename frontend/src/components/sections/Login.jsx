@@ -7,7 +7,7 @@ const initialForm = { email: '', password: '' };
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4177';
 
-export default function Login({ open, onClose, onLoginSuccess, restrictToAdmin = false }) {
+export default function Login({ open, onClose, onLoginSuccess, restrictToAdmin = false, restrictToUser = false }) {
   const [form, setForm] = useState(initialForm);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -30,6 +30,9 @@ export default function Login({ open, onClose, onLoginSuccess, restrictToAdmin =
       }
       if (restrictToAdmin && data.role !== 'admin') {
         throw new Error('This login is for admins only. Attendees can log in from the Event page.');
+      }
+      if (restrictToUser && data.role !== 'user') {
+        throw new Error('Admin login is not allowed here. Please log in from the home page.');
       }
       setForm(initialForm);
       onLoginSuccess?.(data);
@@ -73,7 +76,7 @@ export default function Login({ open, onClose, onLoginSuccess, restrictToAdmin =
             type="password"
             value={form.password}
             onChange={(e) => setField('password')(e.target.value)}
-            placeholder="Your mobile number"
+            placeholder="Your password"
             required
           />
         </div>
