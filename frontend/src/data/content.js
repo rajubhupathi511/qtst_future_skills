@@ -3,7 +3,7 @@ export const navLinks = [
   { label: 'Programs', href: '#programs' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Network', href: '#network' },
-  { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'Stories', href: '#stories' },
   { label: 'Contact Us', href: '#contact' },
 ];
 
@@ -39,6 +39,13 @@ export const eventHighlights = [
     icon: 'flask',
     desc: 'Watch emerging ventures present live to a panel of investors.',
   },
+];
+
+export const impactStats = [
+  { value: '20+', label: 'University Partners', icon: 'building' },
+  { value: '25+', label: 'GCC Collaborations', icon: 'globe' },
+  { value: '30+', label: 'EdTech Platforms', icon: 'flask' },
+  { value: '300+', label: 'Hiring Partners', icon: 'briefcase' },
 ];
 
 export const stats = [
@@ -146,6 +153,66 @@ export const networkChapters = [
   { title: 'University Chapters', icon: 'building', desc: 'Campus-level chapters building the next generation of talent.' },
 ];
 
+export const journeySteps = [
+  {
+    title: 'Discover & Enroll',
+    icon: 'search',
+    desc: 'Explore programs aligned to your goals and enroll at a center or university chapter near you.',
+  },
+  {
+    title: 'Train Hands-On',
+    icon: 'flask',
+    desc: 'Learn by doing in tech experience labs with industry-aligned, expert-led curriculum.',
+  },
+  {
+    title: 'Get Certified',
+    icon: 'trophy',
+    desc: 'Earn globally recognized credentials validated by our certification council.',
+  },
+  {
+    title: 'Launch Your Career',
+    icon: 'briefcase',
+    desc: 'Connect with hiring partners through our job portal, job fairs, and placement drives.',
+  },
+];
+
+export const testimonials = [
+  {
+    quote:
+      'The hands-on lab training completely changed how I learn. Within months of certification, I received offers from three companies through the job portal.',
+    name: 'Priya S.',
+    role: 'Certified Learner, Cloud Computing',
+    initials: 'PS',
+  },
+  {
+    quote:
+      'Partnering with the Foundation gave our students access to industry-grade skilling that our campus alone could never provide. Placement outcomes speak for themselves.',
+    name: 'Dr. Ramesh K.',
+    role: 'Dean, Partner University',
+    initials: 'RK',
+  },
+  {
+    quote:
+      'We hire from their certified talent pool every quarter. The candidates arrive job-ready — a rare thing in today’s market.',
+    name: 'Anita M.',
+    role: 'Talent Head, GCC Hiring Partner',
+    initials: 'AM',
+  },
+  {
+    quote:
+      'Starting a university chapter connected our campus to a national network of mentors, hackathons, and real industry projects.',
+    name: 'Vikram T.',
+    role: 'Student Chapter Lead',
+    initials: 'VT',
+  },
+];
+
+export const networkJoin = [
+  'Start a university chapter on your campus',
+  'Partner as an institution or training center',
+  'Mentor learners and judge hackathons',
+];
+
 export const infraRequirements = [
   'Systems',
   'Digital Board',
@@ -172,7 +239,7 @@ export const footerLinks = {
     { label: 'Programs', href: '#programs' },
     { label: 'Gallery', href: '#gallery' },
     { label: 'Network', href: '#network' },
-    { label: 'Infrastructure', href: '#infrastructure' },
+    { label: 'Stories', href: '#stories' },
   ],
   programs: [
     { label: 'Skill Certifications', href: '#programs' },

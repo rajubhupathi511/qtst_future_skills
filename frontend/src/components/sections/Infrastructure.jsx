@@ -17,7 +17,7 @@ export default function Infrastructure() {
         />
 
         <div className="infra__grid">
-          <div className="infra__card infra__card--revenue">
+          <div className="infra__card infra__card--revenue" data-aos="fade-right" data-aos-duration="850">
             <img src={revenueImg} alt="Revenue growth" className="infra__revenue-img" />
             <div className="infra__card-body">
               <h3>Revenue Streams</h3>
@@ -29,7 +29,7 @@ export default function Infrastructure() {
             </div>
           </div>
 
-          <div className="infra__card infra__card--requirements">
+          <div className="infra__card infra__card--requirements" data-aos="fade-left" data-aos-delay="150" data-aos-duration="850">
             <h3>Infra Requirements</h3>
             <ul className="infra__req-list">
               {infraRequirements.map((item) => (

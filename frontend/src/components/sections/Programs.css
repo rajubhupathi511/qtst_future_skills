@@ -38,6 +38,12 @@
   align-items: center;
   justify-content: center;
   background: rgba(241, 90, 41, 0.1);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.program-card:hover .program-card__icon {
+  transform: scale(1.12) rotate(-6deg);
+  background: rgba(241, 90, 41, 0.18);
 }
 
 .programs__highlights {
@@ -79,6 +85,11 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.highlight-card:hover .highlight-card__icon {
+  transform: scale(1.1) rotate(6deg);
 }
 
 .highlight-card h3 {
@@ -128,6 +139,12 @@
   overflow: hidden;
   aspect-ratio: 4 / 3;
   box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skilling-photo:hover {
+  transform: translateY(-5px) rotate(-0.8deg);
+  box-shadow: var(--shadow-md);
 }
 
 .skilling-photo img {

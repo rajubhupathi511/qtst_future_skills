@@ -1,10 +1,8 @@
 import meetingImg from '../../assets/images/meeting.png';
 import Icon from '../ui/Icon';
 import SectionHeading from '../ui/SectionHeading';
-import { networkTeams, networkChapters } from '../../data/content';
+import { networkChapters, networkJoin } from '../../data/content';
 import './Network.css';
-
-const teamIcons = ['network', 'briefcase', 'building', 'globe', 'mic', 'flask', 'trophy', 'pin', 'check', 'calendar'];
 
 export default function Network() {
   return (
@@ -20,8 +18,8 @@ export default function Network() {
         />
 
         <div className="network__chapters">
-          {networkChapters.map((chapter) => (
-            <div className="chapter-card" key={chapter.title}>
+          {networkChapters.map((chapter, i) => (
+            <div className="chapter-card" key={chapter.title} data-aos="fade-up" data-aos-delay={i * 120}>
               <div className="chapter-card__dot">
                 <Icon name={chapter.icon} size={20} color="#fff" />
               </div>
@@ -32,28 +30,37 @@ export default function Network() {
         </div>
 
         <div className="network__team">
-          <div className="network__team-photo">
+          <div className="network__team-photo" data-aos="clip-reveal" data-aos-duration="1000">
             <img src={meetingImg} alt="Team collaborating" />
           </div>
 
-          <div className="network__team-body">
+          <div className="network__team-body" data-aos="fade-left" data-aos-delay="150">
             <div className="network__team-head">
-              <h3>Our Team</h3>
+              <h3>Join the Network</h3>
               <p className="network__team-sub">
-                A multidisciplinary team driving every chapter of the network forward.
+                Bring the Future Skills movement to your campus, institution, or organization.
               </p>
             </div>
 
-            <div className="network__team-grid">
-              {networkTeams.map((team, i) => (
-                <div className="team-card" key={team}>
-                  <div className="team-card__icon">
-                    <Icon name={teamIcons[i % teamIcons.length]} size={18} color="#fff" />
-                  </div>
-                  <span>{team}</span>
-                </div>
+            <ul className="network__join-list">
+              {networkJoin.map((item, i) => (
+                <li
+                  className="network__join-item"
+                  key={item}
+                  data-aos="fade-up"
+                  data-aos-delay={250 + i * 120}
+                >
+                  <span className="network__join-check">
+                    <Icon name="check" size={14} color="#fff" />
+                  </span>
+                  {item}
+                </li>
               ))}
-            </div>
+            </ul>
+
+            <a href="#contact" className="btn btn-primary network__join-btn" data-aos="fade-up" data-aos-delay="620">
+              Get Involved <Icon name="arrow" size={16} />
+            </a>
           </div>
         </div>
       </div>

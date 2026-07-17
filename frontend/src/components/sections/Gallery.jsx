@@ -52,9 +52,11 @@ export default function Gallery() {
           {photos.map((photo, index) => (
             <button
               type="button"
-              className="gallery__item"
+              className="gallery__item shine"
               key={photo.caption}
               onClick={() => setActiveIndex(index)}
+              data-aos="zoom-in"
+              data-aos-delay={(index % 4) * 90}
             >
               <img src={photo.src} alt={photo.desc || photo.caption} loading="lazy" />
               <span className="gallery__item-caption">{photo.caption}</span>

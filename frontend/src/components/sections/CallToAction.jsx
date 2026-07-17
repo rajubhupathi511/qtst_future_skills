@@ -52,11 +52,11 @@ export default function CallToAction() {
   return (
     <section id="contact" className="cta">
       <div className="container cta__inner">
-        <div className="cta__visual">
+        <div className="cta__visual" data-aos="fade-right" data-aos-duration="900">
           <img src={teamImg} alt="Team reviewing a partnership proposal" />
         </div>
 
-        <div className="cta__content">
+        <div className="cta__content" data-aos="fade-left" data-aos-delay="150">
           <div>
             <h2>Ready to Shape the Future of Skilling?</h2>
             <p>

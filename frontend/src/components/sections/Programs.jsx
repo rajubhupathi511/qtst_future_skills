@@ -25,8 +25,13 @@ export default function Programs() {
         />
 
         <div className="programs__grid">
-          {keyPrograms.map((program) => (
-            <div className="program-card" key={program.title}>
+          {keyPrograms.map((program, i) => (
+            <div
+              className="program-card"
+              key={program.title}
+              data-aos="zoom-in-up"
+              data-aos-delay={(i % 3) * 100}
+            >
               <div className="program-card__icon">
                 <Icon name={program.icon} size={22} color="var(--orange)" />
               </div>
@@ -36,8 +41,8 @@ export default function Programs() {
         </div>
 
         <div className="programs__highlights">
-          {programHighlights.map((item) => (
-            <div className="highlight-card" key={item.title}>
+          {programHighlights.map((item, i) => (
+            <div className="highlight-card" key={item.title} data-aos="fade-up" data-aos-delay={i * 150}>
               <div className="highlight-card__icon">
                 <Icon name={item.icon} size={26} color="#fff" />
               </div>
@@ -48,13 +53,18 @@ export default function Programs() {
         </div>
 
         <div className="programs__gallery">
-          <div className="programs__gallery-head">
+          <div className="programs__gallery-head" data-aos="fade-up">
             <h3>Skilling In Action</h3>
             <p>A look inside our labs, classrooms, and certification drives nationwide.</p>
           </div>
           <div className="programs__gallery-grid">
-            {skillingShots.map((photo) => (
-              <figure className="skilling-photo" key={photo.caption}>
+            {skillingShots.map((photo, i) => (
+              <figure
+                className="skilling-photo shine"
+                key={photo.caption}
+                data-aos="zoom-in"
+                data-aos-delay={(i % 3) * 120}
+              >
                 <img src={photo.src} alt={photo.caption} loading="lazy" />
                 <figcaption>{photo.caption}</figcaption>
               </figure>

@@ -33,6 +33,13 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  animation: kenBurns 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta__visual img {
+    animation: none;
+  }
 }
 
 .cta__content {

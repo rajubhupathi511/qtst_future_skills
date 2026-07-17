@@ -34,6 +34,21 @@
   border: 1.5px dashed rgba(12, 27, 58, 0.15);
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  animation: aboutRingSpin 45s linear infinite;
+}
+
+@keyframes aboutRingSpin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__visual-ring,
+  .about__visual-card--main,
+  .about__visual-card--small {
+    animation: none;
+  }
 }
 
 .about__visual-blob {

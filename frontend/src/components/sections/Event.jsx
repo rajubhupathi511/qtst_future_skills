@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
 import './Event.css';
