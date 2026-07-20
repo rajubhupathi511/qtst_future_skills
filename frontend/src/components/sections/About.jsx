@@ -9,7 +9,7 @@ export default function About() {
   return (
     <section id="about" className="about section">
       <div className="container about__inner">
-        <div className="about__visual">
+        <div className="about__visual" data-aos="fade-right" data-aos-duration="900">
           <div className="about__visual-ring" />
           <div className="about__visual-blob about__visual-blob--orange" />
           <div className="about__visual-blob about__visual-blob--teal" />
@@ -17,10 +17,10 @@ export default function About() {
           <div className="about__visual-card about__visual-card--main">
             <img src={booksImg} alt="Stack of books representing curriculum" />
           </div>
-          <div className="about__visual-card about__visual-card--small">
+          <div className="about__visual-card about__visual-card--small" data-aos="zoom-in" data-aos-delay="350">
             <img src={gradcapImg} alt="Graduation cap" />
           </div>
-          <div className="about__visual-tag">
+          <div className="about__visual-tag" data-aos="fade-up" data-aos-delay="500">
             <Icon name="pin" size={18} color="var(--orange-light)" />
             <div>
               <strong>Pan-India</strong>
@@ -29,7 +29,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="about__content">
+        <div className="about__content" data-aos="fade-left" data-aos-delay="100">
           <SectionHeading
             align="left"
             eyebrow="About Our Foundation"
@@ -42,7 +42,7 @@ export default function About() {
             partnerships, and industry-aligned certification programs.
           </p>
 
-          <div className="about__mission">
+          <div className="about__mission" data-aos="fade-up" data-aos-delay="200">
             <h3>Our Mission</h3>
             <p>
               To bridge the skills gap by delivering world-class certification
@@ -54,8 +54,13 @@ export default function About() {
           </div>
 
           <div className="about__pillars">
-            {pillars.map((pillar) => (
-              <div className={`about__pillar about__pillar--${pillar.color}`} key={pillar.title}>
+            {pillars.map((pillar, i) => (
+              <div
+                className={`about__pillar about__pillar--${pillar.color}`}
+                key={pillar.title}
+                data-aos="fade-up"
+                data-aos-delay={300 + i * 130}
+              >
                 <h4>{pillar.title}</h4>
                 <ul>
                   {pillar.items.map((item) => (

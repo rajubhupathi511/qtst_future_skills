@@ -10,29 +10,30 @@ export default function Navbar({ onOpenAuth, authLabel = 'Join Us' }) {
   const [activeHref, setActiveHref] = useState(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => {
     const ids = ['home', ...navLinks.map((link) => link.href.slice(1))];
     const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
 
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            setActiveHref(id === 'home' ? null : `#${id}`);
-          }
-        });
+        const visible = entries.filter((entry) => entry.isIntersecting);
+        if (visible.length === 0) return;
+        const topMost = visible.reduce((a, b) =>
+          a.boundingClientRect.top <= b.boundingClientRect.top ? a : b
+        );
+        setActiveHref(topMost.target.id === 'home' ? null : `#${topMost.target.id}`);
       },
-      { rootMargin: '-100px 0px -70% 0px', threshold: 0 }
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
     );
-
     sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (

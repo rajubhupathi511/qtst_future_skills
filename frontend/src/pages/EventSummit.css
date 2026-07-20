@@ -242,6 +242,16 @@
   z-index: 1;
   width: 100%;
   max-width: 420px;
+  animation: esumPosterFloat 7s ease-in-out infinite;
+}
+
+@keyframes esumPosterFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 .esum__poster-img {
@@ -268,7 +278,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .esum__poster-glow {
+  .esum__poster-glow,
+  .esum__poster-frame {
     animation: none;
   }
 }

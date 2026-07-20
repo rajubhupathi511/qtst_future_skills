@@ -26,6 +26,11 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
+  transition: box-shadow 0.3s ease;
+}
+
+.cta__visual:hover {
+  box-shadow: var(--shadow-lg), 0 0 0 6px rgba(241, 90, 41, 0.18);
 }
 
 .cta__visual img {
@@ -33,6 +38,20 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  animation: kenBurns 18s ease-in-out infinite;
+  transition: transform 0.4s ease;
+}
+
+.cta__visual:hover img {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta__visual,
+  .cta__visual img {
+    animation: none;
+    transition: none;
+  }
 }
 
 .cta__content {

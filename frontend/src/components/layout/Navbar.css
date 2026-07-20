@@ -43,10 +43,11 @@
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: clamp(14px, 1.6vw, 32px);
   font-weight: 600;
-  font-size: 15px;
+  font-size: clamp(13px, 1.1vw, 15px);
   color: var(--navy);
+  white-space: nowrap;
 }
 
 .navbar__links a {

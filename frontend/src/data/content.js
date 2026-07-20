@@ -1,9 +1,12 @@
 export const navLinks = [
-  { label: 'About Us', href: '#about' },
-  { label: 'Programs', href: '#programs' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Network', href: '#network' },
-  { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'Focus Areas', href: '#focus-areas' },
+  { label: 'Skilling', href: '#skilling-for-future' },
+  { label: 'Employment', href: '#employment-generation' },
+  { label: 'Entrepreneurship', href: '#entrepreneurship' },
+  { label: 'SCO', href: '#community-outreach' },
+  { label: 'CSR', href: '#csr' },
+  { label: 'Partner With Us', href: '#why-partner' },
+  { label: 'Get Involved', href: '#get-involved' },
   { label: 'Contact Us', href: '#contact' },
 ];
 
@@ -38,6 +41,37 @@ export const eventHighlights = [
     title: 'Startup Pitches',
     icon: 'flask',
     desc: 'Watch emerging ventures present live to a panel of investors.',
+  },
+];
+
+export const impactStats = [
+  { value: '20+', label: 'University Partners', icon: 'building' },
+  { value: '25+', label: 'GCC Collaborations', icon: 'globe' },
+  { value: '30+', label: 'EdTech Platforms', icon: 'flask' },
+  { value: '300+', label: 'Hiring Partners', icon: 'briefcase' },
+];
+
+export const heroSlides = [
+  {
+    image: '/1.png',
+    eyebrow: 'Brand DNA · Core Value',
+    title: 'Access',
+    lead: 'Everything begins with access.',
+    body: 'Not everyone reaches access.',
+    highlight: 'Access reaches everyone.',
+  },
+  {
+    image: '/2.png',
+    eyebrow: 'The Enemy',
+    kicker: 'Not unemployment. Not poverty. Not education.',
+    title: 'The Skill Gap.',
+    lead: "The single force holding back India's future — and the one enemy this movement exists to defeat.",
+  },
+  {
+    image: '/3.png',
+    eyebrow: "India's Employability Movement",
+    title: 'The Movement Constitution',
+    lead: "India's Employability Movement",
   },
 ];
 
@@ -146,6 +180,66 @@ export const networkChapters = [
   { title: 'University Chapters', icon: 'building', desc: 'Campus-level chapters building the next generation of talent.' },
 ];
 
+export const journeySteps = [
+  {
+    title: 'Discover & Enroll',
+    icon: 'search',
+    desc: 'Explore programs aligned to your goals and enroll at a center or university chapter near you.',
+  },
+  {
+    title: 'Train Hands-On',
+    icon: 'flask',
+    desc: 'Learn by doing in tech experience labs with industry-aligned, expert-led curriculum.',
+  },
+  {
+    title: 'Get Certified',
+    icon: 'trophy',
+    desc: 'Earn globally recognized credentials validated by our certification council.',
+  },
+  {
+    title: 'Launch Your Career',
+    icon: 'briefcase',
+    desc: 'Connect with hiring partners through our job portal, job fairs, and placement drives.',
+  },
+];
+
+export const testimonials = [
+  {
+    quote:
+      'The hands-on lab training completely changed how I learn. Within months of certification, I received offers from three companies through the job portal.',
+    name: 'Priya S.',
+    role: 'Certified Learner, Cloud Computing',
+    initials: 'PS',
+  },
+  {
+    quote:
+      'Partnering with the Foundation gave our students access to industry-grade skilling that our campus alone could never provide. Placement outcomes speak for themselves.',
+    name: 'Dr. Ramesh K.',
+    role: 'Dean, Partner University',
+    initials: 'RK',
+  },
+  {
+    quote:
+      'We hire from their certified talent pool every quarter. The candidates arrive job-ready — a rare thing in today’s market.',
+    name: 'Anita M.',
+    role: 'Talent Head, GCC Hiring Partner',
+    initials: 'AM',
+  },
+  {
+    quote:
+      'Starting a university chapter connected our campus to a national network of mentors, hackathons, and real industry projects.',
+    name: 'Vikram T.',
+    role: 'Student Chapter Lead',
+    initials: 'VT',
+  },
+];
+
+export const networkJoin = [
+  'Start a university chapter on your campus',
+  'Partner as an institution or training center',
+  'Mentor learners and judge hackathons',
+];
+
 export const infraRequirements = [
   'Systems',
   'Digital Board',
@@ -166,13 +260,120 @@ export const revenueStreams = [
   'Franchising',
 ];
 
+export const employmentJourney = [
+  { title: 'Train', icon: 'flask', desc: 'Industry-aligned skilling that builds job-ready capability.' },
+  { title: 'Counsel', icon: 'users', desc: 'One-on-one career counselling to match strengths with roles.' },
+  { title: 'Connect', icon: 'network', desc: 'Introductions to employers through job fairs and partnerships.' },
+  { title: 'Place', icon: 'briefcase', desc: 'Placement support through internships and apprenticeships.' },
+];
+
+export const entrepreneurshipAreas = [
+  { title: 'Business Mentoring', icon: 'briefcase' },
+  { title: 'Startup Readiness', icon: 'check' },
+  { title: 'Business Planning', icon: 'calendar' },
+  { title: 'Financial Literacy', icon: 'chart' },
+  { title: 'Innovation Support', icon: 'flask' },
+  { title: 'Market Linkage', icon: 'globe' },
+];
+
+export const outreachAreas = [
+  {
+    title: 'Education',
+    icon: 'book',
+    desc: 'Expanding access to quality learning in underserved communities.',
+  },
+  {
+    title: 'Health Awareness',
+    icon: 'heart',
+    desc: 'Promoting wellbeing through community health initiatives.',
+  },
+  {
+    title: 'Digital Inclusion',
+    icon: 'globe',
+    desc: 'Bridging the digital divide with access, tools, and literacy.',
+  },
+  {
+    title: 'Environmental Sustainability',
+    icon: 'leaf',
+    desc: 'Encouraging eco-conscious practices and green initiatives.',
+  },
+  {
+    title: 'Community Development',
+    icon: 'network',
+    desc: 'Strengthening local infrastructure and shared resources.',
+  },
+  {
+    title: 'Volunteer Engagement',
+    icon: 'users',
+    desc: 'Mobilizing volunteers to drive grassroots, hands-on impact.',
+  },
+];
+
+export const csrFocusAreas = [
+  { title: 'Skill Development', icon: 'flask' },
+  { title: 'Employability', icon: 'briefcase' },
+  { title: 'Women Empowerment', icon: 'heart' },
+  { title: 'Education', icon: 'book' },
+  { title: 'Entrepreneurship', icon: 'chart' },
+  { title: 'Rural Development', icon: 'pin' },
+  { title: 'Digital Inclusion', icon: 'globe' },
+  { title: 'Community Development', icon: 'network' },
+];
+
+export const partnerTypes = [
+  { title: 'Corporates', icon: 'building' },
+  { title: 'Government Departments', icon: 'pin' },
+  { title: 'Educational Institutions', icon: 'book' },
+  { title: 'Universities', icon: 'building' },
+  { title: 'Industry Associations', icon: 'network' },
+  { title: 'Development Organizations', icon: 'globe' },
+  { title: 'NGOs', icon: 'heart' },
+  { title: 'CSR Foundations', icon: 'check' },
+  { title: 'Technology Partners', icon: 'flask' },
+  { title: 'International Agencies', icon: 'globe' },
+];
+
+export const impactApproachSteps = [
+  { title: 'Learn', icon: 'search' },
+  { title: 'Build Skills', icon: 'flask' },
+  { title: 'Earn Certifications', icon: 'trophy' },
+  { title: 'Gain Employment', icon: 'briefcase' },
+  { title: 'Start Enterprises', icon: 'chart' },
+  { title: 'Improve Livelihoods', icon: 'check' },
+  { title: 'Empower Communities', icon: 'users' },
+  { title: 'Create Sustainable Impact', icon: 'leaf' },
+];
+
+export const getInvolvedOptions = [
+  {
+    title: 'Sponsor',
+    icon: 'heart',
+    desc: 'Fund education and skilling for those who need it most.',
+  },
+  {
+    title: 'Volunteer',
+    icon: 'users',
+    desc: 'Share your time, skills, and expertise with our programmes.',
+  },
+  {
+    title: 'Partner',
+    icon: 'network',
+    desc: 'Collaborate with us through CSR and community initiatives.',
+  },
+  {
+    title: 'Donate',
+    icon: 'check',
+    desc: 'Support our mission with a contribution of any size.',
+  },
+];
+
 export const footerLinks = {
   quickLinks: [
     { label: 'About Us', href: '#about' },
     { label: 'Programs', href: '#programs' },
     { label: 'Gallery', href: '#gallery' },
     { label: 'Network', href: '#network' },
-    { label: 'Infrastructure', href: '#infrastructure' },
+    { label: 'Stories', href: '#stories' },
   ],
   programs: [
     { label: 'Skill Certifications', href: '#programs' },
