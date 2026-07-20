@@ -211,7 +211,6 @@ button {
   clip-path: inset(0 0 0 0);
 }
 
-<<<<<<< HEAD
 /* Gentle continuous bob for icon circles across content sections — the
    same "alive" quality as the Hero's floating chips, just subtler so a
    whole grid of icons doesn't feel busy. Pair with an animation-delay
@@ -248,8 +247,6 @@ button {
   animation: blobDrift 14s ease-in-out infinite;
 }
 
-=======
->>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
 @media (prefers-reduced-motion: reduce) {
   .shine:hover::before {
     animation: none;
@@ -257,11 +254,8 @@ button {
   [data-aos='clip-reveal'] {
     clip-path: none;
   }
-<<<<<<< HEAD
   .icon-float,
   .blob-drift {
     animation: none;
   }
-=======
->>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
 }

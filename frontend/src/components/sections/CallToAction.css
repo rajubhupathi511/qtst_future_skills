@@ -39,7 +39,6 @@
   object-fit: cover;
   display: block;
   animation: kenBurns 18s ease-in-out infinite;
-<<<<<<< HEAD
   transition: transform 0.4s ease;
 }
 
@@ -52,13 +51,6 @@
   .cta__visual img {
     animation: none;
     transition: none;
-=======
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cta__visual img {
-    animation: none;
->>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
   }
 }
 

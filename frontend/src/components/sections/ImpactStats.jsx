@@ -15,11 +15,7 @@ export default function ImpactStats() {
               data-aos="zoom-in"
               data-aos-delay={120 + i * 100}
             >
-<<<<<<< HEAD
               <span className="impact__icon icon-float" style={{ animationDelay: `${i * 0.3}s` }}>
-=======
-              <span className="impact__icon">
->>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
                 <Icon name={stat.icon} size={22} color="var(--orange-light)" />
               </span>
               <CountUp value={stat.value} className="impact__value" />

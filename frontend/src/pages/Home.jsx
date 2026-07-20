@@ -4,7 +4,6 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import Hero from '../components/sections/Hero';
 import MarqueeStrip from '../components/sections/MarqueeStrip';
-<<<<<<< HEAD
 // import About from '../components/sections/About';
 import FocusAreas from '../components/sections/FocusAreas';
 import SkillingForFuture from '../components/sections/SkillingForFuture';
@@ -24,17 +23,6 @@ import WhyPartner from '../components/sections/WhyPartner';
 // import Network from '../components/sections/Network';
 // import Testimonials from '../components/sections/Testimonials';
 import GetInvolved from '../components/sections/GetInvolved';
-=======
-import About from '../components/sections/About';
-import ImpactStats from '../components/sections/ImpactStats';
-import BackToTop from '../components/ui/BackToTop';
-import EventBanner from '../components/ui/EventBanner';
-import Programs from '../components/sections/Programs';
-import Journey from '../components/sections/Journey';
-import Gallery from '../components/sections/Gallery';
-import Network from '../components/sections/Network';
-import Testimonials from '../components/sections/Testimonials';
->>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
 import CallToAction from '../components/sections/CallToAction';
 import Login from '../components/sections/Login';
 
@@ -69,7 +57,6 @@ export default function Home({ session, setSession }) {
       <Navbar onOpenAuth={handleOpenAuth} authLabel={authLabel} />
       <main>
         <Hero />
-<<<<<<< HEAD
         {/* <MarqueeStrip /> */}
         {/* <About /> */}
         <FocusAreas />
@@ -88,16 +75,6 @@ export default function Home({ session, setSession }) {
         {/* <Gallery /> */}
         {/* <Network /> */}
         {/* <Testimonials /> */}
-=======
-        <MarqueeStrip />
-        <About />
-        <ImpactStats />
-        <Programs />
-        <Journey />
-        <Gallery />
-        <Network />
-        <Testimonials />
->>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
         <CallToAction />
       </main>
       <Footer />
