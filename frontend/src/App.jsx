@@ -12,6 +12,7 @@ function ScrollAnimations() {
   const location = useLocation();
 
   useEffect(() => {
+<<<<<<< HEAD
     // A page load that lands directly on a #hash (refresh, pasted link, new
     // tab) has the browser jump straight there before AOS ever runs, so
     // every section above the fold is already "in view" and its entrance
@@ -21,6 +22,8 @@ function ScrollAnimations() {
     const initialHash = window.location.hash;
     if (initialHash) window.scrollTo(0, 0);
 
+=======
+>>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
     AOS.init({
       duration: 750,
       easing: 'ease-out-cubic',
@@ -28,6 +31,7 @@ function ScrollAnimations() {
       offset: 60,
       disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     });
+<<<<<<< HEAD
 
     if (initialHash) {
       const id = initialHash.slice(1);
@@ -36,6 +40,8 @@ function ScrollAnimations() {
       }, 300);
       return () => clearTimeout(timer);
     }
+=======
+>>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
   }, []);
 
   useEffect(() => {

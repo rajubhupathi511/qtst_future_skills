@@ -1,4 +1,5 @@
 export const navLinks = [
+<<<<<<< HEAD
   { label: 'Focus Areas', href: '#focus-areas' },
   { label: 'Skilling', href: '#skilling-for-future' },
   { label: 'Employment', href: '#employment-generation' },
@@ -7,6 +8,13 @@ export const navLinks = [
   { label: 'CSR', href: '#csr' },
   { label: 'Partner With Us', href: '#why-partner' },
   { label: 'Get Involved', href: '#get-involved' },
+=======
+  { label: 'About Us', href: '#about' },
+  { label: 'Programs', href: '#programs' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Network', href: '#network' },
+  { label: 'Stories', href: '#stories' },
+>>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
   { label: 'Contact Us', href: '#contact' },
 ];
 
@@ -51,6 +59,7 @@ export const impactStats = [
   { value: '300+', label: 'Hiring Partners', icon: 'briefcase' },
 ];
 
+<<<<<<< HEAD
 export const heroSlides = [
   {
     image: '/1.png',
@@ -75,6 +84,8 @@ export const heroSlides = [
   },
 ];
 
+=======
+>>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
 export const stats = [
   { label: 'Ongoing Enrollment', icon: 'calendar' },
   { label: 'Multiple Centers', icon: 'pin' },

@@ -24,7 +24,11 @@ export default function Programs() {
             skilling lifecycle — designed with industry and delivered with excellence."
         />
 
+<<<<<<< HEAD
         {/* <div className="programs__grid">
+=======
+        <div className="programs__grid">
+>>>>>>> 1195a6075955f7d9a07fc3150267d0139fe9dbf8
           {keyPrograms.map((program, i) => (
             <div
               className="program-card"
