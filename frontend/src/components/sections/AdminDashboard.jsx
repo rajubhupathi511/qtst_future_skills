@@ -1,0 +1,594 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
+import Icon from '../ui/Icon';
+import './AdminDashboard.css';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4177';
+
+const NAV_ITEMS = [
+  { key: 'analytics', label: 'Analytics', icon: 'network' },
+  { key: 'checkin', label: 'Check-in', icon: 'check' },
+  { key: 'contact', label: 'Contact Us', icon: 'mail' },
+];
+
+function Stat({ label, value, color }) {
+  return (
+    <div className="admin-stat" style={color ? { color } : undefined}>
+      <div className="admin-stat__value" style={color ? { color } : undefined}>{value}</div>
+      <div className="admin-stat__label">{label}</div>
+    </div>
+  );
+}
+
+function Tab({ label, active, onClick }) {
+  return (
+    <button type="button" className={`admin-tab ${active ? 'admin-tab--active' : ''}`} onClick={onClick}>
+      {label}
+    </button>
+  );
+}
+
+function BarChart({ data, max }) {
+  return (
+    <div className="admin-bars">
+      {data.map(({ label, value }) => (
+        <div key={label} className="admin-bars__col">
+          <span className="admin-bars__value">{value}</span>
+          <div className="admin-bars__bar" style={{ height: `${(value / max) * 80}px` }} />
+          <span className="admin-bars__label">{label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const PAGE_SIZE_OPTIONS = [5, 10, 25, 50];
+
+function Pagination({ page, pageSize, total, onPageChange, onPageSizeChange }) {
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const safePage = Math.min(page, totalPages);
+  const start = total === 0 ? 0 : (safePage - 1) * pageSize + 1;
+  const end = Math.min(safePage * pageSize, total);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  return (
+    <div className="admin-pagination">
+      <div className="admin-pagination__size">
+        <label htmlFor="admin-pagination-size">Rows per page</label>
+        <select
+          id="admin-pagination-size"
+          value={pageSize}
+          onChange={(e) => {
+            onPageSizeChange(Number(e.target.value));
+            onPageChange(1);
+          }}
+        >
+          {PAGE_SIZE_OPTIONS.map((n) => (
+            <option key={n} value={n}>{n}</option>
+          ))}
+        </select>
+      </div>
+
+      <span className="admin-pagination__info">
+        {total === 0 ? '0 results' : `${start}–${end} of ${total}`}
+      </span>
+
+      <div className="admin-pagination__nav">
+        <button
+          type="button"
+          className="admin-pagination__btn"
+          disabled={safePage <= 1}
+          onClick={() => onPageChange(safePage - 1)}
+          aria-label="Previous page"
+        >
+          <Icon name="arrow" size={12} className="admin-pagination__icon--prev" />
+        </button>
+        {pageNumbers.map((n) => (
+          <button
+            key={n}
+            type="button"
+            className={`admin-pagination__btn ${n === safePage ? 'admin-pagination__btn--active' : ''}`}
+            onClick={() => onPageChange(n)}
+          >
+            {n}
+          </button>
+        ))}
+        <button
+          type="button"
+          className="admin-pagination__btn"
+          disabled={safePage >= totalPages}
+          onClick={() => onPageChange(safePage + 1)}
+          aria-label="Next page"
+        >
+          <Icon name="arrow" size={12} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function AdminDashboard({ onLogout }) {
+  const [tab, setTab] = useState('analytics');
+  const [checkinView, setCheckinView] = useState('scanner');
+  const [registrations, setRegistrations] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [scanInput, setScanInput] = useState('');
+  const [scanResult, setScanResult] = useState(null);
+  const [scanning, setScanning] = useState(false);
+  const [scanDropdownOpen, setScanDropdownOpen] = useState(false);
+
+  const [contactMessages, setContactMessages] = useState([]);
+  const [contactLoading, setContactLoading] = useState(false);
+
+  const [attendeePage, setAttendeePage] = useState(1);
+  const [attendeePageSize, setAttendeePageSize] = useState(10);
+  const [attendeeSearch, setAttendeeSearch] = useState('');
+  const [contactPage, setContactPage] = useState(1);
+  const [contactPageSize, setContactPageSize] = useState(10);
+  const [contactSearch, setContactSearch] = useState('');
+
+  useEffect(() => {
+    let ignore = false;
+
+    (async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`${API_URL}/api/event-registrations`);
+        const data = await res.json();
+        if (!ignore) setRegistrations(Array.isArray(data) ? data : []);
+      } catch {
+        if (!ignore) setRegistrations([]);
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    })();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let ignore = false;
+
+    (async () => {
+      setContactLoading(true);
+      try {
+        const res = await fetch(`${API_URL}/api/contact-messages`);
+        const data = await res.json();
+        if (!ignore) setContactMessages(Array.isArray(data) ? data : []);
+      } catch {
+        if (!ignore) setContactMessages([]);
+      } finally {
+        if (!ignore) setContactLoading(false);
+      }
+    })();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  const handleScan = async () => {
+    const passId = scanInput.trim().toUpperCase();
+    if (!passId) return;
+    setScanning(true);
+    setScanResult(null);
+    try {
+      const res = await fetch(`${API_URL}/api/event-registrations/checkin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passId }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setScanResult({ error: data.error || 'Pass not found. Check the ID and try again.' });
+        return;
+      }
+      setScanResult({ warning: data.alreadyCheckedIn, registration: data.registration });
+      setRegistrations((prev) =>
+        prev.map((r) => (r.passId === data.registration.passId ? data.registration : r))
+      );
+    } catch {
+      setScanResult({ error: 'Something went wrong. Please try again.' });
+    } finally {
+      setScanning(false);
+    }
+  };
+
+  const checkInFromList = async (passId) => {
+    const res = await fetch(`${API_URL}/api/event-registrations/checkin`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ passId }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setRegistrations((prev) => prev.map((r) => (r.passId === passId ? data.registration : r)));
+    }
+  };
+
+  const totalCheckedIn = registrations.filter((r) => r.checkedIn).length;
+  const cityData = Object.entries(
+    registrations.reduce((acc, r) => {
+      acc[r.city] = (acc[r.city] || 0) + 1;
+      return acc;
+    }, {})
+  )
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([label, value]) => ({ label, value }));
+  const maxCity = Math.max(...cityData.map((d) => d.value), 1);
+
+  const scanQuery = scanInput.trim().toLowerCase();
+  const pendingMatches = registrations
+    .filter((r) => !r.checkedIn)
+    .filter((r) =>
+      !scanQuery || [r.name, r.passId, r.org, r.city].some((v) => v?.toLowerCase().includes(scanQuery))
+    )
+    .slice(0, 6);
+
+  const attendeeQuery = attendeeSearch.trim().toLowerCase();
+  const filteredRegistrations = attendeeQuery
+    ? registrations.filter((r) =>
+        [r.name, r.org, r.city, r.passId].some((v) => v?.toLowerCase().includes(attendeeQuery))
+      )
+    : registrations;
+
+  const contactQuery = contactSearch.trim().toLowerCase();
+  const filteredContactMessages = contactQuery
+    ? contactMessages.filter((m) =>
+        [m.name, m.email, m.message].some((v) => v?.toLowerCase().includes(contactQuery))
+      )
+    : contactMessages;
+
+  return (
+    <div className="admin-shell">
+      <aside className="admin-sidebar">
+        <div className="admin-sidebar__top">
+          <Link to="/" className="admin-sidebar__brand">
+            <img src={logo} alt="Quality Thought" className="admin-sidebar__brand-logo" />
+            <span className="admin-sidebar__brand-text">
+              Event <span>Dashboard</span>
+            </span>
+          </Link>
+        </div>
+
+        <nav className="admin-sidebar__nav">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.key}
+              type="button"
+              className={`admin-sidebar__link ${tab === item.key ? 'admin-sidebar__link--active' : ''}`}
+              onClick={() => setTab(item.key)}
+              title={item.label}
+            >
+              <Icon name={item.icon} size={17} />
+              {item.label}
+            </button>
+          ))}
+        </nav>
+      </aside>
+
+      <div className="admin-main">
+        <header className="admin-topbar">
+          <h1 className="admin-topbar__title">
+            {NAV_ITEMS.find((item) => item.key === tab)?.label}
+          </h1>
+          <div className="admin-topbar__right">
+            <Link to="/" className="admin-topbar__home">Back to site</Link>
+            <button type="button" className="btn btn-outline-dark admin-topbar__logout" onClick={onLogout}>
+              Log out
+            </button>
+          </div>
+        </header>
+
+        <div className="admin-content">
+        {tab === 'checkin' && (
+          <div>
+            <div className="admin-subtabs">
+              <Tab label="Scanner" active={checkinView === 'scanner'} onClick={() => setCheckinView('scanner')} />
+              <Tab label="Attendee List" active={checkinView === 'list'} onClick={() => setCheckinView('list')} />
+            </div>
+
+            {checkinView === 'scanner' && (
+              <div>
+                <h3 className="admin-subheading">Event Check-in</h3>
+                <p className="admin-hint">Enter the Pass ID, or search a pending attendee by name below.</p>
+                <div className="admin-scan-row">
+                  <div className="admin-scan-search">
+                    <input
+                      value={scanInput}
+                      onChange={(e) => { setScanInput(e.target.value); setScanResult(null); setScanDropdownOpen(true); }}
+                      onFocus={() => setScanDropdownOpen(true)}
+                      onBlur={() => setTimeout(() => setScanDropdownOpen(false), 150)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleScan()}
+                      placeholder="e.g. FSS-001 or attendee name"
+                      className="admin-scan-input"
+                    />
+                    {scanDropdownOpen && (
+                      <div className="admin-scan-dropdown">
+                        {pendingMatches.length === 0 && (
+                          <div className="admin-scan-dropdown__empty">No pending attendees match.</div>
+                        )}
+                        {pendingMatches.map((r) => (
+                          <button
+                            type="button"
+                            key={r.passId}
+                            className="admin-scan-dropdown__item"
+                            onMouseDown={() => {
+                              setScanInput(r.passId);
+                              setScanResult(null);
+                              setScanDropdownOpen(false);
+                            }}
+                          >
+                            <span className="admin-scan-dropdown__name">{r.name}</span>
+                            <span className="admin-scan-dropdown__meta">{r.org} · {r.passId}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <button type="button" className="btn btn-primary" onClick={handleScan} disabled={scanning}>
+                    {scanning ? 'Checking…' : 'Check In'}
+                  </button>
+                </div>
+
+                {scanResult && (
+                  <div className={`admin-scan-result ${scanResult.error ? 'admin-scan-result--error' : scanResult.warning ? 'admin-scan-result--warn' : 'admin-scan-result--ok'}`}>
+                    {scanResult.error && <strong>{scanResult.error}</strong>}
+                    {scanResult.warning && (
+                      <div>
+                        <strong>Already checked in</strong>
+                        <div>{scanResult.registration.name} — {scanResult.registration.org}</div>
+                      </div>
+                    )}
+                    {scanResult.registration && !scanResult.warning && (
+                      <div>
+                        <strong>Check-in successful</strong>
+                        <div>{scanResult.registration.name} · {scanResult.registration.designation} at {scanResult.registration.org}</div>
+                        <div className="admin-scan-result__meta">{scanResult.registration.city} · Pass {scanResult.registration.passId}</div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="admin-stats-row">
+                  <Stat label="Total Registered" value={registrations.length} />
+                  <Stat label="Checked In" value={totalCheckedIn} color="var(--teal)" />
+                  <Stat label="Pending" value={registrations.length - totalCheckedIn} color="var(--muted)" />
+                </div>
+              </div>
+            )}
+
+            {checkinView === 'list' && (
+              <div>
+                <h3 className="admin-subheading">All Attendees</h3>
+                <div className="admin-search">
+                  <Icon name="search" size={15} className="admin-search__icon" />
+                  <input
+                    type="text"
+                    value={attendeeSearch}
+                    onChange={(e) => { setAttendeeSearch(e.target.value); setAttendeePage(1); }}
+                    placeholder="Search by name, organization, city or pass ID…"
+                    className="admin-search__input"
+                  />
+                </div>
+                {loading && <p className="admin-hint">Loading…</p>}
+                {!loading && registrations.length === 0 && <p className="admin-hint">No registrations yet.</p>}
+                {!loading && registrations.length > 0 && filteredRegistrations.length === 0 && (
+                  <p className="admin-hint">No attendees match "{attendeeSearch}".</p>
+                )}
+                {!loading && filteredRegistrations.length > 0 && (
+                  <>
+                    <div className="admin-table-wrap">
+                      <table className="admin-table">
+                        <thead>
+                          <tr>
+                            <th>SNO</th>
+                            <th>Name</th>
+                            <th>Organization</th>
+                            <th>City</th>
+                            <th>Pass ID</th>
+                            <th>Tags</th>
+                            <th>Status</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filteredRegistrations
+                            .slice((attendeePage - 1) * attendeePageSize, attendeePage * attendeePageSize)
+                            .map((r, i) => (
+                              <tr key={r.passId}>
+                                <td>{(attendeePage - 1) * attendeePageSize + i + 1}</td>
+                                <td>{r.name}</td>
+                                <td>{r.org}</td>
+                                <td>{r.city}</td>
+                                <td>{r.passId}</td>
+                                <td>
+                                  <span className="admin-table__tags">
+                                    {r.speaker && <Icon name="mic" size={14} color="var(--accent, #7C6AF7)" />}
+                                    {r.award && <Icon name="trophy" size={14} color="var(--orange)" />}
+                                  </span>
+                                </td>
+                                <td>
+                                  <span className={`admin-pill ${r.checkedIn ? 'admin-pill--in' : ''}`}>
+                                    {r.checkedIn ? '✓ In' : 'Pending'}
+                                  </span>
+                                </td>
+                                <td>
+                                  {!r.checkedIn && (
+                                    <button type="button" className="admin-pill-btn" onClick={() => checkInFromList(r.passId)}>
+                                      Check In
+                                    </button>
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <Pagination
+                      page={attendeePage}
+                      pageSize={attendeePageSize}
+                      total={filteredRegistrations.length}
+                      onPageChange={setAttendeePage}
+                      onPageSizeChange={setAttendeePageSize}
+                    />
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {tab === 'analytics' && (
+          <div>
+            <h3 className="admin-subheading">Event Analytics</h3>
+            <div className="admin-stats-row">
+              <Stat label="Total Registrations" value={registrations.length} />
+              <Stat label="Check-in Rate" value={`${Math.round((totalCheckedIn / registrations.length) * 100) || 0}%`} color="var(--teal)" />
+              <Stat label="Speakers" value={registrations.filter((r) => r.speaker).length} color="var(--accent, #7C6AF7)" />
+              <Stat label="Award Nominees" value={registrations.filter((r) => r.award).length} color="var(--orange)" />
+            </div>
+
+            <div className="admin-analytics-grid">
+              <div className="admin-card">
+                <div className="admin-card__title">Interest Breakdown</div>
+                {[
+                  ['Speakers', registrations.filter((r) => r.speaker).length],
+                  ['Award Nominees', registrations.filter((r) => r.award).length],
+                  ['Sponsors', registrations.filter((r) => r.sponsor).length],
+                  ['Presenters', registrations.filter((r) => r.presenter).length],
+                ].map(([label, count]) => (
+                  <div key={label} className="admin-bar-row">
+                    <div className="admin-bar-row__head">
+                      <span>{label}</span>
+                      <span>{count}</span>
+                    </div>
+                    <div className="admin-bar-row__track">
+                      <div
+                        className="admin-bar-row__fill"
+                        style={{ width: `${(count / (registrations.length || 1)) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="admin-card">
+                <div className="admin-card__title">Top Cities</div>
+                {cityData.length > 0 ? <BarChart data={cityData} max={maxCity} /> : <p className="admin-hint">No data yet</p>}
+              </div>
+            </div>
+
+            <h3 className="admin-subheading">Recent Registrations</h3>
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>SNO</th>
+                    <th>Name</th>
+                    <th>Organization</th>
+                    <th>Pass ID</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...registrations].slice(0, 5).map((r, i) => (
+                    <tr key={r.passId}>
+                      <td>{i + 1}</td>
+                      <td>{r.name}</td>
+                      <td>{r.org}</td>
+                      <td>{r.passId}</td>
+                      <td>
+                        <span className={`admin-pill ${r.checkedIn ? 'admin-pill--in' : ''}`}>
+                          {r.checkedIn ? '✓ In' : 'Pending'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {tab === 'contact' && (
+          <div>
+            <h3 className="admin-subheading">Contact Us Requests</h3>
+            <p className="admin-hint">Messages submitted through the website's Contact Us form.</p>
+
+            <div className="admin-stats-row">
+              <Stat label="Total Requests" value={contactMessages.length} />
+            </div>
+
+            <div className="admin-search">
+              <Icon name="search" size={15} className="admin-search__icon" />
+              <input
+                type="text"
+                value={contactSearch}
+                onChange={(e) => { setContactSearch(e.target.value); setContactPage(1); }}
+                placeholder="Search by name, email or message…"
+                className="admin-search__input"
+              />
+            </div>
+
+            {contactLoading && <p className="admin-hint">Loading…</p>}
+            {!contactLoading && contactMessages.length === 0 && (
+              <p className="admin-hint">No contact requests yet.</p>
+            )}
+            {!contactLoading && contactMessages.length > 0 && filteredContactMessages.length === 0 && (
+              <p className="admin-hint">No requests match "{contactSearch}".</p>
+            )}
+            {!contactLoading && filteredContactMessages.length > 0 && (
+              <>
+                <div className="admin-table-wrap">
+                  <table className="admin-table">
+                    <thead>
+                      <tr>
+                        <th>SNO</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredContactMessages
+                        .slice((contactPage - 1) * contactPageSize, contactPage * contactPageSize)
+                        .map((m, i) => (
+                          <tr key={m.id}>
+                            <td>{(contactPage - 1) * contactPageSize + i + 1}</td>
+                            <td>{m.name}</td>
+                            <td>
+                              <a href={`mailto:${m.email}`} className="admin-table__email">
+                                {m.email}
+                              </a>
+                            </td>
+                            <td className="admin-table__message">{m.message}</td>
+                            <td>
+                              {new Date(m.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+                <Pagination
+                  page={contactPage}
+                  pageSize={contactPageSize}
+                  total={filteredContactMessages.length}
+                  onPageChange={setContactPage}
+                  onPageSizeChange={setContactPageSize}
+                />
+              </>
+            )}
+          </div>
+        )}
+        </div>
+      </div>
+    </div>
+  );
+}
