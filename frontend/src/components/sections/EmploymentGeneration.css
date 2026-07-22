@@ -9,7 +9,7 @@
 }
 
 .product2-bg {
-  background: url(http://localhost:5173/Web1.png) center no-repeat rgba(236, 237, 241, 0.9);
+  background: url(https://qtst-future-skills.vercel.app/Web1.png) center no-repeat rgba(236, 237, 241, 0.9);
   background-size: cover;
   background-position: revert;
   background-attachment: fixed;
