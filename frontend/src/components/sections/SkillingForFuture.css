@@ -636,7 +636,7 @@
 }
 
 .product-bg {
-  background: url(http://localhost:5173/skilling-future.png) center no-repeat rgba(236, 237, 241, 0.9);
+  background: url(https://qtst-future-skills.vercel.app/skilling-future.png) center no-repeat rgba(236, 237, 241, 0.9);
   background-size: cover;
   background-position: revert;
   background-attachment: fixed;
