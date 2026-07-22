@@ -319,73 +319,6 @@
   white-space: nowrap;
 }
 
-/* Partner logos as a self-scrolling marquee instead of a static grid. */
-.skilling-future__partners--marquee {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  margin-top: 32px;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-}
-
-.skilling-future__partners-track {
-  display: flex;
-  gap: 14px;
-  width: max-content;
-  animation: partnersMarquee 20s linear infinite;
-}
-
-.skilling-future__partners--marquee:hover .skilling-future__partners-track {
-  animation-play-state: paused;
-}
-
-@keyframes partnersMarquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.skilling-future__partners--marquee .skilling-future__partner-logo {
-  flex: 0 0 130px;
-  min-height: 64px;
-  margin-top: 0;
-}
-
-.skilling-future__partners {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.skilling-future__partner-logo {
-  display: grid;
-  min-height: 72px;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  place-items: center;
-  background: var(--white);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
-}
-
-.skilling-future__partner-logo:hover {
-  transform: translateY(-3px) scale(1.03);
-  border-color: rgba(241, 90, 41, 0.38);
-  box-shadow: 0 0 0 4px rgba(241, 90, 41, 0.1), var(--shadow-md);
-}
-
-.skilling-future__partner-logo img {
-  width: 100%;
-  height: 40px;
-  object-fit: contain;
-}
-
 .skilling-future__cta {
   display: inline-flex;
   gap: 8px;
@@ -648,10 +581,6 @@
     height: 34px;
     margin: -17px 0 0 -17px;
   }
-
-  .skilling-future__partners {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 480px) {
@@ -672,10 +601,6 @@
     --portal: 220px;
     --orbit-r: 138px;
   }
-
-  .skilling-future__partners {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -684,15 +609,9 @@
   .skilling-future__image-wrap img,
   .skilling-future__image-wrap--cert,
   .skilling-future__cta,
-  .skilling-future__cta span,
-  .skilling-future__partner-logo,
-  .skilling-future__partners-track {
+  .skilling-future__cta span {
     transition: none;
     animation: none;
-  }
-
-  .skilling-future__partners--marquee {
-    overflow-x: auto;
   }
 
   /* Park the radar in its starting formation instead of spinning it -

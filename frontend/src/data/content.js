@@ -54,7 +54,7 @@ export const impactStats = [
 export const heroSlides = [
   {
     image: '/1.png',
-    eyebrow: 'Brand DNA · Core Value',
+    // eyebrow: 'Brand DNA · Core Value',
     title: 'Access',
     lead: 'Everything begins with access.',
     body: 'Not everyone reaches access.',
@@ -62,14 +62,14 @@ export const heroSlides = [
   },
   {
     image: '/2.png',
-    eyebrow: 'The Enemy',
+    // eyebrow: 'The Enemy',
     kicker: 'Not unemployment. Not poverty. Not education.',
     title: 'The Skill Gap.',
     lead: "The single force holding back India's future — and the one enemy this movement exists to defeat.",
   },
   {
     image: '/3.png',
-    eyebrow: "India's Employability Movement",
+    // eyebrow: "India's Employability Movement",
     title: 'The Movement Constitution',
     lead: "India's Employability Movement",
   },
@@ -369,17 +369,17 @@ export const getInvolvedOptions = [
 
 export const footerLinks = {
   quickLinks: [
-    { label: 'About Us', href: '#about' },
-    { label: 'Programs', href: '#programs' },
-    { label: 'Gallery', href: '#gallery' },
-    { label: 'Network', href: '#network' },
-    { label: 'Stories', href: '#stories' },
+    { label: 'Focus Areas', href: '#focus-areas' },
+    { label: 'Skilling', href: '#skilling-for-future' },
+    { label: 'Employment', href: '#employment-generation' },
+    { label: 'Entrepreneurship', href: '#entrepreneurship' },
+    { label: 'Contact Us', href: '#contact' },
   ],
   programs: [
-    { label: 'Skill Certifications', href: '#programs' },
-    { label: 'Center of Excellence', href: '#programs' },
-    { label: 'Hackathons & Competitions', href: '#programs' },
-    { label: 'Future Skills Summit', href: '#programs' },
+    { label: 'SCO', href: '#community-outreach' },
+    { label: 'CSR', href: '#csr' },
+    { label: 'Partner With Us', href: '#why-partner' },
+    { label: 'Get Involved', href: '#get-involved' },
   ],
 };
 

@@ -36,7 +36,7 @@ export default function Footer({ hideQuickLinks = false }) {
         )}
 
         <div className="footer__col">
-          <h4>Programs</h4>
+          <h4>Explore</h4>
           <ul>
             {footerLinks.programs.map((link) => (
               <li key={link.label}><a href={link.href}>{link.label}</a></li>

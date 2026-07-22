@@ -4,6 +4,10 @@
   overflow: hidden;
 }
 
+.employment .section-heading__desc {
+  color: #fff;
+}
+
 .product2-bg {
   background: url(http://localhost:5173/Web1.png) center no-repeat rgba(236, 237, 241, 0.9);
   background-size: cover;

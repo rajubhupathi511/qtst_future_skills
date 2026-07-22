@@ -2,12 +2,6 @@ import Icon from '../ui/Icon';
 import certificationImg from '../../assets/focus/certification.png';
 import workforceImg from '../../assets/focus/workforce.png';
 import skillingFutureImg from '../../assets/focus/skilling-future.png';
-import googleLogo from '../../assets/focus/google.svg';
-import microsoftLogo from '../../assets/focus/microsoft.svg';
-import awsLogo from '../../assets/focus/aws.svg';
-import ciscoLogo from '../../assets/focus/cisco.svg';
-import oracleLogo from '../../assets/focus/oracle.svg';
-import sapLogo from '../../assets/focus/sap.svg';
 import './SkillingForFuture.css';
 
 const skills = [
@@ -42,18 +36,6 @@ const skills = [
     description: 'Prepare for real-world challenges with the right attitude, skills and workplace behaviors.',
   },
 ];
-
-const partners = [
-  { name: 'Google', logo: googleLogo },
-  { name: 'Microsoft', logo: microsoftLogo },
-  { name: 'AWS', logo: awsLogo },
-  { name: 'Cisco', logo: ciscoLogo },
-  { name: 'Oracle', logo: oracleLogo },
-  { name: 'SAP', logo: sapLogo },
-];
-
-// Duplicated once so the marquee track can loop seamlessly at -50%.
-const marqueePartners = [...partners, ...partners];
 
 function Eyebrow({ children }) {
   return <p className="skilling-future__eyebrow">{children}</p>;
@@ -140,20 +122,6 @@ export default function SkillingForFuture() {
               collaborate with industry and technology partners to provide certification programmes
               that validate skills and prepare learners for competitive job markets.
             </p>
-
-            <div className="skilling-future__partners skilling-future__partners--marquee" aria-label="Industry partners">
-              <div className="skilling-future__partners-track">
-                {marqueePartners.map((partner, i) => (
-                  <div className="skilling-future__partner-logo" key={`${partner.name}-${i}`}>
-                    <img
-                      src={partner.logo}
-                      alt={i < partners.length ? `${partner.name} logo` : ''}
-                      aria-hidden={i >= partners.length ? 'true' : undefined}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
 
