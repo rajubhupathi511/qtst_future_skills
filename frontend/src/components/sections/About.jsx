@@ -42,15 +42,31 @@ export default function About() {
             partnerships, and industry-aligned certification programs.
           </p>
 
-          <div className="about__mission" data-aos="fade-up" data-aos-delay="200">
-            <h3>Our Mission</h3>
-            <p>
-              To bridge the skills gap by delivering world-class certification
-              programs, global skilling initiatives, and industry-aligned
-              training for the workforce of tomorrow. Join us in shaping a
-              future-ready workforce through innovation, education, and
-              strategic partnerships.
-            </p>
+          <div className="about__vision-mission">
+            <div className="about__vm-card about__vm-card--vision" data-aos="fade-up" data-aos-delay="150">
+              <div className="about__vm-icon">
+                <Icon name="search" size={20} />
+              </div>
+              <h3>Our Vision</h3>
+              <p>
+                To create an inclusive and future-ready society where every
+                individual has the skills, opportunities, and confidence to
+                succeed in a rapidly evolving world.
+              </p>
+            </div>
+            <div className="about__vm-card about__vm-card--mission" data-aos="fade-up" data-aos-delay="250">
+              <div className="about__vm-icon">
+                <Icon name="flask" size={20} />
+              </div>
+              <h3>Our Mission</h3>
+              <p>
+                To bridge the gap between education and employment by
+                delivering industry-aligned skilling, promoting
+                entrepreneurship, empowering women, supporting education, and
+                fostering sustainable livelihoods through strategic
+                partnerships and community engagement.
+              </p>
+            </div>
           </div>
 
           <div className="about__pillars">

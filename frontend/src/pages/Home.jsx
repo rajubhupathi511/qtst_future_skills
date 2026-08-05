@@ -5,6 +5,7 @@ import Footer from '../components/layout/Footer';
 import Hero from '../components/sections/Hero';
 import MarqueeStrip from '../components/sections/MarqueeStrip';
 // import About from '../components/sections/About';
+import Leadership from '../components/sections/Leadership';
 import FocusAreas from '../components/sections/FocusAreas';
 import SkillingForFuture from '../components/sections/SkillingForFuture';
 import EmploymentGeneration from '../components/sections/EmploymentGeneration';
@@ -59,6 +60,7 @@ export default function Home({ session, setSession }) {
         <Hero />
         {/* <MarqueeStrip /> */}
         {/* <About /> */}
+        <Leadership />
         <FocusAreas />
         <SkillingForFuture />
         <EmploymentGeneration />

@@ -70,7 +70,7 @@
   padding: 42px 16px 22px;
   border-radius: 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.55);
+  background: #ffffff;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.35s ease, box-shadow 0.35s ease;
 }
 
@@ -78,6 +78,8 @@
   transform: translateY(-8px);
   background: var(--white);
   box-shadow: var(--shadow-lg);
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 /* Orange corner lines join into a complete outline when a card is hovered. */
@@ -89,8 +91,8 @@
   width: 18px;
   height: 18px;
   box-sizing: border-box;
-  border-top: 2px solid var(--orange);
-  border-left: 2px solid var(--orange);
+  border-top: 5px solid var(--orange);
+  border-left: 5px solid var(--orange);
   border-radius: 20px 0 0 0;
   transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1), height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
