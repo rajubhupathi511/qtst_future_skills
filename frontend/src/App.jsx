@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Home from './pages/Home';
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 import Dashboard from './pages/Dashboard';
 import EventSummit from './pages/EventSummit';
 
@@ -72,6 +74,8 @@ function App() {
       <ScrollAnimations />
       <Routes>
         <Route path="/" element={<Home session={session} setSession={setSession} />} />
+        <Route path="/about" element={<AboutUs session={session} setSession={setSession} />} />
+        <Route path="/contact" element={<ContactUs session={session} setSession={setSession} />} />
         <Route path="/event" element={<EventSummit session={session} setSession={setSession} />} />
         <Route path="/dashboard" element={<Dashboard session={session} setSession={setSession} />} />
       </Routes>

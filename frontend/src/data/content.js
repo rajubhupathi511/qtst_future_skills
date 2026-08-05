@@ -2,15 +2,34 @@ export const navLinks = [
   { label: 'Focus Areas', href: '#focus-areas' },
   { label: 'Skilling', href: '#skilling-for-future' },
   { label: 'Employment', href: '#employment-generation' },
-  { label: 'Entrepreneurship', href: '#entrepreneurship' },
-  { label: 'SCO', href: '#community-outreach' },
-  { label: 'CSR', href: '#csr' },
-  { label: 'Partner With Us', href: '#why-partner' },
-  { label: 'Get Involved', href: '#get-involved' },
-  { label: 'Contact Us', href: '#contact' },
+  {
+    label: 'Others',
+    href: '#others',
+    children: [
+      { label: 'Entrepreneurship', href: '#entrepreneurship' },
+      { label: 'SCO', href: '#community-outreach' },
+      { label: 'CSR', href: '#csr' },
+      { label: 'Partner With Us', href: '#why-partner' },
+      { label: 'Get Involved', href: '#get-involved' },
+      { label: 'Contact Us', href: '/contact', route: true },
+    ],
+  },
 ];
 
 export const eventLink = { label: 'Events', href: '/event' };
+
+// `position` is the img's object-position / transform-origin anchor (keeps
+// the crop centered on the face) and `zoom` is an extra CSS scale on top of
+// the natural object-fit: cover crop — together they normalize each
+// headshot so every face reads at roughly the same scale despite very
+// different source crops (tight studio headshot vs. loose lifestyle photo).
+export const leadershipTeam = [
+  { name: 'Ramana Bhupathi', role: 'Chairman & Managing Director', photo: '/org.jpeg', color: 'orange', position: '40% 20%', zoom: 1.15 },
+  { name: 'Krish Chintaluri', role: 'Chief Executive Officer', photo: '/org1.jpeg', color: 'teal', position: '50% 14%', zoom: 1.25 },
+  { name: 'Dr. Pavani Kadiyala', role: 'Chief Branding Officer', photo: '/org2.jpeg', color: 'navy', position: '58% 8%', zoom: 1.3 },
+  { name: 'Geetha Murthy', role: 'Head Human Resource', photo: '/org3.jpeg', color: 'teal', position: '50% 22%', zoom: 1 },
+  { name: 'Sashank Karri', role: 'Head Operations', photo: '/org4.jpeg', color: 'orange', position: '50% 12%', zoom: 1.05 },
+];
 
 export const eventStats = [
   { label: 'Speakers', value: '30+' },

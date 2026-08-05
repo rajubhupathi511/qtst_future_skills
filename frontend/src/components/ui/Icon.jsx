@@ -29,7 +29,30 @@ const paths = {
   chart: 'M4 20V10h3v10H4zm6.5 0V4h3v16h-3zM17 20v-7h3v7h-3z',
 };
 
+const strokePaths = {
+  'chevron-down': 'M6 9l6 6 6-6',
+};
+
 export default function Icon({ name, size = 20, color = 'currentColor', className = '' }) {
+  const strokeD = strokePaths[name];
+  if (strokeD) {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke={color}
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={className}
+        aria-hidden="true"
+      >
+        <path d={strokeD} />
+      </svg>
+    );
+  }
   const d = paths[name];
   if (!d) return null;
   return (
