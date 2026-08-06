@@ -35,6 +35,28 @@
   width: 100%;
   aspect-ratio: 3 / 4;
   margin-bottom: 22px;
+  animation: leadershipFloat 5s ease-in-out infinite;
+}
+
+/* Gentle idle bob so the grid feels alive before a visitor ever hovers,
+   staggered per card via nth-child so they don't bob in unison. */
+@keyframes leadershipFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.leadership__card:nth-child(1) .leadership__frame { animation-delay: 0s; }
+.leadership__card:nth-child(2) .leadership__frame { animation-delay: 0.3s; }
+.leadership__card:nth-child(3) .leadership__frame { animation-delay: 0.6s; }
+.leadership__card:nth-child(4) .leadership__frame { animation-delay: 0.9s; }
+.leadership__card:nth-child(5) .leadership__frame { animation-delay: 1.2s; }
+
+.leadership__card:hover .leadership__frame {
+  animation-play-state: paused;
 }
 
 .leadership__swoosh {
@@ -134,6 +156,9 @@
   .leadership__name {
     animation: none;
     background-position: 0 0;
+  }
+  .leadership__frame {
+    animation: none;
   }
 }
 

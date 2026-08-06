@@ -1,11 +1,60 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import sponsorImg from '../../assets/focus/sponsor-education.png';
 import Icon from '../ui/Icon';
 import './SponsorEducation.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function SponsorEducation() {
+  const sectionRef = useRef(null);
+  const glowRef = useRef(null);
+  const dotgridRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const glow = glowRef.current;
+    const dotgrid = dotgridRef.current;
+    if (!section || !glow || !dotgrid) return undefined;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return undefined;
+    }
+
+    const ctx = gsap.context(() => {
+      // Background decoration drifts slower than the scroll (glow) and
+      // faster (dotgrid) so the banner reads with a subtle sense of depth.
+      gsap.to(glow, {
+        yPercent: 18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+
+      gsap.to(dotgrid, {
+        yPercent: -28,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="sponsor-education" className="sponsor section">
-      <div className="sponsor__dotgrid" aria-hidden="true"></div>
+    <section id="sponsor-education" className="sponsor section" ref={sectionRef}>
+      <div className="sponsor__glow" ref={glowRef} aria-hidden="true"></div>
+      <div className="sponsor__dotgrid" ref={dotgridRef} aria-hidden="true"></div>
 
       <div className="container sponsor__inner">
         <div className="sponsor__content" data-aos="fade-right" data-aos-duration="900">

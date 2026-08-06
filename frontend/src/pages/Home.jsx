@@ -10,7 +10,7 @@ import FocusAreas from '../components/sections/FocusAreas';
 import SkillingForFuture from '../components/sections/SkillingForFuture';
 import EmploymentGeneration from '../components/sections/EmploymentGeneration';
 import Entrepreneurship from '../components/sections/Entrepreneurship';
-import ImpactStats from '../components/sections/ImpactStats';
+// import ImpactStats from '../components/sections/ImpactStats';
 import BackToTop from '../components/ui/BackToTop';
 import EventBanner from '../components/ui/EventBanner';
 // import Programs from '../components/sections/Programs';
@@ -58,14 +58,14 @@ export default function Home({ session, setSession }) {
       <Navbar onOpenAuth={handleOpenAuth} authLabel={authLabel} />
       <main>
         <Hero />
-        {/* <MarqueeStrip /> */}
+        <MarqueeStrip />
+        {/* <ImpactStats /> */}
         {/* <About /> */}
         <Leadership />
         <FocusAreas />
         <SkillingForFuture />
         <EmploymentGeneration />
         <Entrepreneurship />
-        {/* <ImpactStats /> */}
         {/* <Programs /> */}
         <CommunityOutreach />
         <CSR />

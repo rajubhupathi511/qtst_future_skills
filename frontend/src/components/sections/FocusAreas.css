@@ -48,6 +48,11 @@
   box-shadow: 0 28px 48px rgba(12, 27, 58, 0.22);
 }
 
+.focus-areas__card--center:hover {
+  transform: translateX(-50%) translateY(-8px) scale(1.02);
+  box-shadow: 0 34px 58px rgba(12, 27, 58, 0.28);
+}
+
 .focus-areas__card--left,
 .focus-areas__card--right {
   z-index: 1;
@@ -92,6 +97,10 @@
 
 .focus-areas__card--center .focus-areas__image {
   transform: scale(1);
+}
+
+.focus-areas__card--center:hover .focus-areas__image {
+  transform: scale(1.06);
 }
 
 .focus-areas__content {
@@ -179,7 +188,8 @@
   .focus-areas__card,
   .focus-areas__card--center,
   .focus-areas__card--left,
-  .focus-areas__card--right {
+  .focus-areas__card--right,
+  .focus-areas__card--center:hover {
     position: relative;
     top: auto;
     left: auto;
@@ -190,7 +200,8 @@
     transition: none;
   }
 
-  .focus-areas__image {
+  .focus-areas__image,
+  .focus-areas__card--center:hover .focus-areas__image {
     transform: none;
     transition: none;
   }

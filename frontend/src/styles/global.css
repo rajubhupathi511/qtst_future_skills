@@ -247,6 +247,19 @@ button {
   animation: blobDrift 14s ease-in-out infinite;
 }
 
+/* Shared card hover-lift — consistent rise + shadow + subtle scale for any
+   card grid that doesn't already define its own hover treatment. Apply
+   alongside a card's existing class, e.g. className="some-card hover-lift". */
+.hover-lift {
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+}
+
+.hover-lift:hover,
+.hover-lift:focus-visible {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: var(--shadow-lg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .shine:hover::before {
     animation: none;
@@ -257,5 +270,12 @@ button {
   .icon-float,
   .blob-drift {
     animation: none;
+  }
+  .hover-lift {
+    transition: none;
+  }
+  .hover-lift:hover,
+  .hover-lift:focus-visible {
+    transform: none;
   }
 }
