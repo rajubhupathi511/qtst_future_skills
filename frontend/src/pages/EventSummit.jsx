@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo-full.jpeg';
 import posterImg from '../assets/images/skilling/eventimage.jpeg';
 import Icon from '../components/ui/Icon';
@@ -7,30 +7,11 @@ import CountUp from '../components/ui/CountUp';
 import BackToTop from '../components/ui/BackToTop';
 import Footer from '../components/layout/Footer';
 import Event from '../components/sections/Event';
-import Login from '../components/sections/Login';
 import { eventStats, eventHighlights, contactInfo } from '../data/content';
 import './EventSummit.css';
 
-export default function EventSummit({ session, setSession }) {
+export default function EventSummit() {
   const [eventOpen, setEventOpen] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const handleOpenAuth = () => {
-    if (!session) {
-      setLoginOpen(true);
-    } else {
-      navigate('/dashboard');
-    }
-  };
-
-  const handleLoginSuccess = (data) => {
-    setSession(data);
-    setLoginOpen(false);
-    navigate('/dashboard');
-  };
-
-  const authLabel = !session ? 'Login' : session.role === 'admin' ? 'Admin' : 'My Ticket';
 
   return (
     <div className="esum">
@@ -40,9 +21,6 @@ export default function EventSummit({ session, setSession }) {
         </Link>
         <div className="esum__topbar-right">
           <Link to="/" className="esum__home-link">Back to site</Link>
-          <button type="button" className="btn esum__login-btn" onClick={handleOpenAuth}>
-            {authLabel}
-          </button>
         </div>
       </header>
 
@@ -129,7 +107,6 @@ export default function EventSummit({ session, setSession }) {
       <BackToTop />
 
       <Event open={eventOpen} onClose={() => setEventOpen(false)} />
-      <Login open={loginOpen} onClose={() => setLoginOpen(false)} onLoginSuccess={handleLoginSuccess} restrictToUser />
     </div>
   );
 }

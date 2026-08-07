@@ -10,7 +10,7 @@ export async function createEventRegistration(req, res, next) {
       return res.status(400).json({ errors });
     }
 
-    const { name, mobile, email, org, designation, city, bio, speaker, award, sponsor, presenter } = req.body;
+    const { name, mobile, email, address } = req.body;
     const trimmedEmail = email.trim();
     const trimmedMobile = mobile.trim();
 
@@ -42,14 +42,7 @@ export async function createEventRegistration(req, res, next) {
         name: name.trim(),
         mobile: mobile.trim(),
         email: email.trim(),
-        org: org.trim(),
-        designation: designation.trim(),
-        city: city.trim(),
-        bio: bio.trim(),
-        speaker: Boolean(speaker),
-        award: Boolean(award),
-        sponsor: Boolean(sponsor),
-        presenter: Boolean(presenter),
+        address: address.trim(),
       },
     });
 

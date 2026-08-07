@@ -6,9 +6,6 @@ export function validateEventRegistration(body) {
   if (!body.name || !body.name.trim()) errors.name = 'Required';
   if (!MOBILE_RE.test(body.mobile || '')) errors.mobile = 'Enter a valid 10-digit number';
   if (!EMAIL_RE.test(body.email || '')) errors.email = 'Enter a valid email';
-  if (!body.org || !body.org.trim()) errors.org = 'Required';
-  if (!body.designation || !body.designation.trim()) errors.designation = 'Required';
-  if (!body.city || !body.city.trim()) errors.city = 'Required';
-  if (!body.bio || !body.bio.trim()) errors.bio = 'Required';
+  if (!body.address || !body.address.trim()) errors.address = 'Required';
   return errors;
 }

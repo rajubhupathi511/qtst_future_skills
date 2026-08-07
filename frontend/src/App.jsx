@@ -80,7 +80,7 @@ function App() {
           <Route path="/" element={<Home session={session} setSession={setSession} />} />
           <Route path="/about" element={<AboutUs session={session} setSession={setSession} />} />
           <Route path="/contact" element={<ContactUs session={session} setSession={setSession} />} />
-          <Route path="/event" element={<EventSummit session={session} setSession={setSession} />} />
+          <Route path="/event" element={<EventSummit />} />
           <Route path="/dashboard" element={<Dashboard session={session} setSession={setSession} />} />
         </Routes>
       </PageTransition>

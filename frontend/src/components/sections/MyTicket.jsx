@@ -45,10 +45,6 @@ function QRCanvas({ value, size = 120 }) {
   return <canvas ref={ref} width={size} height={size} className="ticket__qr-canvas" />;
 }
 
-function Badge({ label }) {
-  return <span className="ticket__badge">{label}</span>;
-}
-
 export default function MyTicket({ registration }) {
   const ticketRef = useRef(null);
   const [downloading, setDownloading] = useState(false);
@@ -107,14 +103,7 @@ export default function MyTicket({ registration }) {
           <div className="ticket__info">
             <div className="ticket__label">Attendee</div>
             <div className="ticket__name">{registration.name}</div>
-            <div className="ticket__sub">{registration.designation}</div>
-            <div className="ticket__sub">{registration.org} · {registration.city}</div>
-            <div className="ticket__badges">
-              {registration.speaker && <Badge label="Speaker" />}
-              {registration.award && <Badge label="Nominee" />}
-              {registration.sponsor && <Badge label="Sponsor" />}
-              {registration.presenter && <Badge label="Presenter" />}
-            </div>
+            <div className="ticket__sub">{registration.address}</div>
           </div>
         </div>
 

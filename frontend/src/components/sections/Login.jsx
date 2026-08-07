@@ -89,7 +89,7 @@ export default function Login({ open, onClose, onLoginSuccess, restrictToAdmin =
 
         <p className="auth__hint">
           {restrictToAdmin
-            ? 'Admin access only. Attendees, please log in from the Event page.'
+            ? 'Admin access only.'
             : 'Attendees: password is the mobile number used at registration.'}
         </p>
       </form>

@@ -126,16 +126,6 @@ export async function sendRegistrationConfirmationEmail({ name, email, mobile, p
         </table>
       </div>
 
-      <!-- Login Info -->
-      <div style="background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:16px 20px;margin-bottom:24px;">
-        <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#92400e;">🔐 Access Your Digital Pass</p>
-        <p style="margin:0;font-size:13px;color:#78350f;line-height:1.6;">
-          Login at <a href="https://www.qtfutureskills.org" style="color:#e55c18;font-weight:700;">qtfutureskills.org</a> using:<br/>
-          <strong>Email:</strong> ${email}<br/>
-          <strong>Password:</strong> Your registered mobile number (${mobile})
-        </p>
-      </div>
-
       <!-- Digital Pass -->
       <div style="margin-bottom:8px;">
         <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:#0d1b3e;text-transform:uppercase;letter-spacing:1.5px;">🎫 Your Digital Pass</p>

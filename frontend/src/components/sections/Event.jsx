@@ -3,25 +3,11 @@ import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
 import './Event.css';
 
-const interestOptions = [
-  { key: 'speaker', label: 'Nominate as Speaker', icon: 'mic' },
-  { key: 'award', label: 'Nominate for Award', icon: 'trophy' },
-  { key: 'sponsor', label: 'Sponsor the Event', icon: 'briefcase' },
-  { key: 'presenter', label: 'Represent your organization at event', icon: 'flask' },
-];
-
 const initialForm = {
   name: '',
   mobile: '',
   email: '',
-  org: '',
-  designation: '',
-  city: '',
-  bio: '',
-  speaker: false,
-  award: false,
-  sponsor: false,
-  presenter: false,
+  address: '',
 };
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4177';
@@ -35,17 +21,13 @@ export default function Event({ open, onClose }) {
   const [passData, setPassData] = useState(null);
 
   const setField = (key) => (value) => setForm((f) => ({ ...f, [key]: value }));
-  const toggleInterest = (key) => setForm((f) => ({ ...f, [key]: !f[key] }));
 
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = 'Required';
     if (!/^\d{10}$/.test(form.mobile)) e.mobile = 'Enter a valid 10-digit number';
     if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Enter a valid email';
-    if (!form.org.trim()) e.org = 'Required';
-    if (!form.designation.trim()) e.designation = 'Required';
-    if (!form.city.trim()) e.city = 'Required';
-    if (!form.bio.trim()) e.bio = 'Required';
+    if (!form.address.trim()) e.address = 'Required';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -98,7 +80,7 @@ export default function Event({ open, onClose }) {
           <div className="event__success-icon">✅</div>
           <h3 className="event__success-title">Registration Successful!</h3>
           <p className="event__success-sub">
-            Your pass has been confirmed. Login details have been sent to your email.
+            Your pass has been confirmed. Details have been sent to your email.
           </p>
 
           <button type="button" className="btn btn-primary event__success-close" onClick={handleClose}>
@@ -141,69 +123,15 @@ export default function Event({ open, onClose }) {
           </div>
         </div>
 
-        <div className="event__row">
-          <div className="event__field">
-            <label>Organization <span>*</span></label>
-            <input
-              type="text"
-              value={form.org}
-              onChange={(e) => setField('org')(e.target.value)}
-              placeholder="Company / Institution"
-            />
-            {errors.org && <span className="event__error">{errors.org}</span>}
-          </div>
-          <div className="event__field">
-            <label>Designation <span>*</span></label>
-            <input
-              type="text"
-              value={form.designation}
-              onChange={(e) => setField('designation')(e.target.value)}
-              placeholder="Your role"
-            />
-            {errors.designation && <span className="event__error">{errors.designation}</span>}
-          </div>
-        </div>
-
         <div className="event__field">
-          <label>City <span>*</span></label>
+          <label>Address <span>*</span></label>
           <input
             type="text"
-            value={form.city}
-            onChange={(e) => setField('city')(e.target.value)}
-            placeholder="Your city"
+            value={form.address}
+            onChange={(e) => setField('address')(e.target.value)}
+            placeholder="Your address"
           />
-          {errors.city && <span className="event__error">{errors.city}</span>}
-        </div>
-
-        <div className="event__field">
-          <label>Bio / Social Media Links <span>*</span></label>
-          <input
-            type="text"
-            value={form.bio}
-            onChange={(e) => setField('bio')(e.target.value)}
-            placeholder="linkedin.com/in/you or @handle"
-          />
-          {errors.bio && <span className="event__error">{errors.bio}</span>}
-        </div>
-
-        <div className="event__interests">
-          <span className="event__interests-title">Optional Interests</span>
-          <div className="event__interests-grid">
-            {interestOptions.map(({ key, label, icon }) => (
-              <label key={key} className="event__checkbox">
-                <input
-                  type="checkbox"
-                  checked={form[key]}
-                  onChange={() => toggleInterest(key)}
-                />
-                <span className="event__checkbox-box">
-                  <Icon name="check" size={12} color="#fff" />
-                </span>
-                <Icon name={icon} size={16} color="var(--orange)" />
-                {label}
-              </label>
-            ))}
-          </div>
+          {errors.address && <span className="event__error">{errors.address}</span>}
         </div>
 
         <button type="submit" className="btn btn-primary event__submit" disabled={submitting}>

@@ -29,20 +29,6 @@ function Tab({ label, active, onClick }) {
   );
 }
 
-function BarChart({ data, max }) {
-  return (
-    <div className="admin-bars">
-      {data.map(({ label, value }) => (
-        <div key={label} className="admin-bars__col">
-          <span className="admin-bars__value">{value}</span>
-          <div className="admin-bars__bar" style={{ height: `${(value / max) * 80}px` }} />
-          <span className="admin-bars__label">{label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 const PAGE_SIZE_OPTIONS = [5, 10, 25, 50];
 
 function Pagination({ page, pageSize, total, onPageChange, onPageSizeChange }) {
@@ -210,29 +196,19 @@ export default function AdminDashboard({ onLogout }) {
   };
 
   const totalCheckedIn = registrations.filter((r) => r.checkedIn).length;
-  const cityData = Object.entries(
-    registrations.reduce((acc, r) => {
-      acc[r.city] = (acc[r.city] || 0) + 1;
-      return acc;
-    }, {})
-  )
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(([label, value]) => ({ label, value }));
-  const maxCity = Math.max(...cityData.map((d) => d.value), 1);
 
   const scanQuery = scanInput.trim().toLowerCase();
   const pendingMatches = registrations
     .filter((r) => !r.checkedIn)
     .filter((r) =>
-      !scanQuery || [r.name, r.passId, r.org, r.city].some((v) => v?.toLowerCase().includes(scanQuery))
+      !scanQuery || [r.name, r.passId, r.address].some((v) => v?.toLowerCase().includes(scanQuery))
     )
     .slice(0, 6);
 
   const attendeeQuery = attendeeSearch.trim().toLowerCase();
   const filteredRegistrations = attendeeQuery
     ? registrations.filter((r) =>
-        [r.name, r.org, r.city, r.passId].some((v) => v?.toLowerCase().includes(attendeeQuery))
+        [r.name, r.address, r.passId].some((v) => v?.toLowerCase().includes(attendeeQuery))
       )
     : registrations;
 
@@ -324,7 +300,7 @@ export default function AdminDashboard({ onLogout }) {
                             }}
                           >
                             <span className="admin-scan-dropdown__name">{r.name}</span>
-                            <span className="admin-scan-dropdown__meta">{r.org} · {r.passId}</span>
+                            <span className="admin-scan-dropdown__meta">{r.passId}</span>
                           </button>
                         ))}
                       </div>
@@ -341,14 +317,14 @@ export default function AdminDashboard({ onLogout }) {
                     {scanResult.warning && (
                       <div>
                         <strong>Already checked in</strong>
-                        <div>{scanResult.registration.name} — {scanResult.registration.org}</div>
+                        <div>{scanResult.registration.name}</div>
                       </div>
                     )}
                     {scanResult.registration && !scanResult.warning && (
                       <div>
                         <strong>Check-in successful</strong>
-                        <div>{scanResult.registration.name} · {scanResult.registration.designation} at {scanResult.registration.org}</div>
-                        <div className="admin-scan-result__meta">{scanResult.registration.city} · Pass {scanResult.registration.passId}</div>
+                        <div>{scanResult.registration.name}</div>
+                        <div className="admin-scan-result__meta">Pass {scanResult.registration.passId}</div>
                       </div>
                     )}
                   </div>
@@ -371,7 +347,7 @@ export default function AdminDashboard({ onLogout }) {
                     type="text"
                     value={attendeeSearch}
                     onChange={(e) => { setAttendeeSearch(e.target.value); setAttendeePage(1); }}
-                    placeholder="Search by name, organization, city or pass ID…"
+                    placeholder="Search by name, address or pass ID…"
                     className="admin-search__input"
                   />
                 </div>
@@ -388,10 +364,8 @@ export default function AdminDashboard({ onLogout }) {
                           <tr>
                             <th>SNO</th>
                             <th>Name</th>
-                            <th>Organization</th>
-                            <th>City</th>
+                            <th>Address</th>
                             <th>Pass ID</th>
-                            <th>Tags</th>
                             <th>Status</th>
                             <th></th>
                           </tr>
@@ -403,15 +377,8 @@ export default function AdminDashboard({ onLogout }) {
                               <tr key={r.passId}>
                                 <td>{(attendeePage - 1) * attendeePageSize + i + 1}</td>
                                 <td>{r.name}</td>
-                                <td>{r.org}</td>
-                                <td>{r.city}</td>
+                                <td>{r.address}</td>
                                 <td>{r.passId}</td>
-                                <td>
-                                  <span className="admin-table__tags">
-                                    {r.speaker && <Icon name="mic" size={14} color="var(--accent, #7C6AF7)" />}
-                                    {r.award && <Icon name="trophy" size={14} color="var(--orange)" />}
-                                  </span>
-                                </td>
                                 <td>
                                   <span className={`admin-pill ${r.checkedIn ? 'admin-pill--in' : ''}`}>
                                     {r.checkedIn ? '✓ In' : 'Pending'}
@@ -449,38 +416,8 @@ export default function AdminDashboard({ onLogout }) {
             <div className="admin-stats-row">
               <Stat label="Total Registrations" value={registrations.length} />
               <Stat label="Check-in Rate" value={`${Math.round((totalCheckedIn / registrations.length) * 100) || 0}%`} color="var(--teal)" />
-              <Stat label="Speakers" value={registrations.filter((r) => r.speaker).length} color="var(--accent, #7C6AF7)" />
-              <Stat label="Award Nominees" value={registrations.filter((r) => r.award).length} color="var(--orange)" />
-            </div>
-
-            <div className="admin-analytics-grid">
-              <div className="admin-card">
-                <div className="admin-card__title">Interest Breakdown</div>
-                {[
-                  ['Speakers', registrations.filter((r) => r.speaker).length],
-                  ['Award Nominees', registrations.filter((r) => r.award).length],
-                  ['Sponsors', registrations.filter((r) => r.sponsor).length],
-                  ['Presenters', registrations.filter((r) => r.presenter).length],
-                ].map(([label, count]) => (
-                  <div key={label} className="admin-bar-row">
-                    <div className="admin-bar-row__head">
-                      <span>{label}</span>
-                      <span>{count}</span>
-                    </div>
-                    <div className="admin-bar-row__track">
-                      <div
-                        className="admin-bar-row__fill"
-                        style={{ width: `${(count / (registrations.length || 1)) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="admin-card">
-                <div className="admin-card__title">Top Cities</div>
-                {cityData.length > 0 ? <BarChart data={cityData} max={maxCity} /> : <p className="admin-hint">No data yet</p>}
-              </div>
+              <Stat label="Checked In" value={totalCheckedIn} color="var(--accent, #7C6AF7)" />
+              <Stat label="Pending" value={registrations.length - totalCheckedIn} color="var(--orange)" />
             </div>
 
             <h3 className="admin-subheading">Recent Registrations</h3>
@@ -490,7 +427,7 @@ export default function AdminDashboard({ onLogout }) {
                   <tr>
                     <th>SNO</th>
                     <th>Name</th>
-                    <th>Organization</th>
+                    <th>Address</th>
                     <th>Pass ID</th>
                     <th>Status</th>
                   </tr>
@@ -500,7 +437,7 @@ export default function AdminDashboard({ onLogout }) {
                     <tr key={r.passId}>
                       <td>{i + 1}</td>
                       <td>{r.name}</td>
-                      <td>{r.org}</td>
+                      <td>{r.address}</td>
                       <td>{r.passId}</td>
                       <td>
                         <span className={`admin-pill ${r.checkedIn ? 'admin-pill--in' : ''}`}>
